@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## CV AI Connect
 
-## Getting Started
+Aplicação que conecta a AI's desenvolvida em [Next.js](https://nextjs.org/).
 
-First, run the development server:
+### Paços para criação do projeto
+
+Executamos o seguinte comando para criação do projeto.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx create-next-app@latest cv-ai-connect --tailwind --eslint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Inicializamos o [Shadcn](https://ui.shadcn.com/), componentes reutilizáveis utilizaremos em nossa aplicação.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npx shadcn-ui@latest init
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Exemplo de configuração de um componente **Button**.
 
-## Learn More
+```bash
+npx shadcn-ui@latest add button
+```
 
-To learn more about Next.js, take a look at the following resources:
+Assim que o projeto Next.js estiver configurado, podemos instalar o **Prettier** como uma dependência de desenvolvimento, executando o seguinte comando:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm i -D prettier
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Para garantir que **Prettier** e **ESLint** funcionem juntos, instalamos o pacote `eslint-config-prettier`, executando o seguinte comando:
 
-## Deploy on Vercel
+```bash
+npm i -D eslint-config-prettier
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Após a instalação, abrimos o arquivo de configuração do **ESLint** (`.eslintrc.json` ou `.eslintrc.js`) e adicionamos a seguinte linha:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+{
+    "extends": ["next", "prettier"]
+}
+```
+
+Para classificar automaticamente as classes **CSS** do **Tailwind** usando **Prettier**, instalamos o pacote `prettier-plugin-tailwindcss`, executando o seguinte comando:
+
+```bash
+npm i -D prettier-plugin-tailwindcss
+```
+
+Em seguida, criamos o arquivo `.prettierrc.json` no diretório raiz do projeto, com o seguinte conteúdo:
+
+```bash
+{
+    "trailingComma": "es5",
+    "semi": false,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "plugins": ["prettier-plugin-tailwindcss"]
+}
+```
+
+Para usar o Prettier que definimos, podemos configurar os seguintes scripts no arquivo `package.json`:
