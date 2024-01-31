@@ -1,7 +1,8 @@
-'user client'
+'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Montserrat } from 'next/font/google'
 import {
   Code,
@@ -64,6 +65,8 @@ const routes = [
 ]
 
 const Sidebar = () => {
+  const pathname = usePathname()
+
   return (
     <div className='flex h-full flex-col space-y-4 bg-[#111827] py-4 text-white'>
       <div className='flex-1 px-3 py-2'>
@@ -80,7 +83,12 @@ const Sidebar = () => {
             <Link
               href={route.href}
               key={route.href}
-              className='group flex w-full cursor-pointer justify-start rounded-lg p-3 text-sm font-medium transition hover:bg-white/10 hover:text-white'
+              className={cn(
+                'group flex w-full cursor-pointer justify-start rounded-lg p-3 text-sm font-medium transition hover:bg-white/10 hover:text-white',
+                pathname === route.href
+                  ? 'bg-white/10 text-white'
+                  : 'text-zinc-400'
+              )}
             >
               <div className='flex flex-1 items-center'>
                 <route.icon className={cn('mr-3 h-5 w-5', route.color)} />
