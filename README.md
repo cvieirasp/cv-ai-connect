@@ -147,3 +147,25 @@ Adicionamos o componente **sheet** responsável por controlar a visibilidade da 
 ```bash
 npx shadcn-ui@latest add sheet
 ```
+
+### Criação da página Dashboard
+
+Adicionamos o componente **card** responsável por exibir as ferramentas para seleção.
+
+```bash
+npx shadcn-ui@latest add card
+```
+
+### Criação da página de Conversação
+
+Adicionamos o componente **form** responsável por exibir formulário e respectivos componentes.
+
+```bash
+npx shadcn-ui@latest add form
+```
+
+Adicionamos o componente **input** responsável por exibir campo de texto nos formulários.
+
+```bash
+npx shadcn-ui@latest add input
+```
