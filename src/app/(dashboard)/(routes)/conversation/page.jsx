@@ -1,16 +1,26 @@
 'use client'
 
-import * as z from 'zod'
+import axios from 'axios'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { MessageSquare } from 'lucide-react'
 import Heading from '@/components/heading'
+import Empty from '@/components/empty'
+import Loader from '@/components/loader'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { formSchema } from './constants'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import UserAvatar from '@/components/user-avatar'
+import BotAvatar from '@/components/bot-avatar'
 
 const ConversationPage = () => {
+  const router = useRouter()
+  const [messages, setMessages] = useState([])
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -21,7 +31,26 @@ const ConversationPage = () => {
   const isLoading = form.formState.isSubmitting
 
   const onSubmit = async (data) => {
-    console.log(data)
+    try {
+      const userMessage = {
+        role: 'user',
+        content: data.prompt,
+      }
+
+      const newMessages = [...messages, userMessage]
+
+      const response = await axios.post('/api/conversation', {
+        messages: newMessages,
+      })
+
+      setMessages((current) => [...current, userMessage, response.data])
+
+      form.reset()
+    } catch (err) {
+      console.error(err)
+    } finally {
+      router.refresh()
+    }
   }
 
   return (
@@ -64,7 +93,32 @@ const ConversationPage = () => {
             </form>
           </Form>
         </div>
-        <div className='mt-4 space-y-4'>Conteúdo da mensagem</div>
+        <div className='mt-4 space-y-4'>
+          {isLoading && (
+            <div className='flex w-full items-center justify-center rounded-lg bg-muted p-8'>
+              <Loader />
+            </div>
+          )}
+          {messages.length === 0 && !isLoading && (
+            <Empty label='Inicie uma conversa com nossa IA.' />
+          )}
+          <div className='flex flex-col-reverse gap-y-4'>
+            {messages.map((message) => (
+              <div
+                key={message.content}
+                className={cn(
+                  'flex w-full items-start gap-x-8 rounded-lg p-8',
+                  message.role === 'user'
+                    ? 'border border-black/10 bg-white'
+                    : 'bg-muted'
+                )}
+              >
+                {message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
+                <p className='text-sm'>{message.content}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

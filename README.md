@@ -65,7 +65,7 @@ Para usar o Prettier que definimos, podemos configurar os seguintes scripts no a
 
 ### Configuração da autenticação utilizando Clerk
 
-Criação de conta na plataforma [Clerk](https://clerk.com) e configuração da aplicação.
+Criamos a conta na plataforma [Clerk](https://clerk.com) e configuração da aplicação.
 
 Para configuração e utilização do **Clerk**, instalamos o pacote utilizando o seguinte comando:
 
@@ -156,6 +156,22 @@ Adicionamos o componente **card** responsável por exibir as ferramentas para se
 npx shadcn-ui@latest add card
 ```
 
+### Configuração da API OpenAI
+
+Criamos a conta na plataforma [OpenAI](https://platform.openai.com/) e geramos uma chave secreta.
+
+Em seguida, adicionamos a chave ao arquivo `.env.local`.
+
+```bash
+OPENAI_API_KEY=sk***
+```
+
+Para configuração e utilização da API **OpenAI**, instalamos o pacote utilizando o seguinte comando:
+
+```bash
+npm install openai
+```
+
 ### Criação da página de Conversação
 
 Adicionamos o componente **form** responsável por exibir formulário e respectivos componentes.
@@ -168,4 +184,16 @@ Adicionamos o componente **input** responsável por exibir campo de texto nos fo
 
 ```bash
 npx shadcn-ui@latest add input
+```
+
+Instalamos o pacote **Axios** para realizarmos as integrações com as API's:
+
+```bash
+npm install axios
+```
+
+Adicionamos o componente **avatar** responsável por exibir o avatar proveninente do **Clerk**.
+
+```bash
+npx shadcn-ui@latest add avatar
 ```
