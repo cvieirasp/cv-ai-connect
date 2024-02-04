@@ -197,3 +197,11 @@ Adicionamos o componente **avatar** responsável por exibir o avatar proveninent
 ```bash
 npx shadcn-ui@latest add avatar
 ```
+
+### Criação da página de Geração de Código
+
+Instalamos o pacote **react-markdown** para que a resposta gerada pela IA seja exibida formatada.
+
+```bash
+npm install react-markdown
+```

@@ -4,8 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 const UserAvatar = () => {
   const { user } = useUser()
 
-  console.log('user', user)
-
   return (
     <Avatar className='h-8 w-8'>
       <AvatarImage src={user?.imageUrl} />

@@ -7,6 +7,12 @@ const openai = new OpenAI({
   apiKey: key,
 })
 
+const instructionMessage = {
+  role: 'system',
+  content:
+    'You are a code generator. You must asnwer only in markdown code snippets. Use code comments for explanation.',
+}
+
 export async function POST(req) {
   try {
     const { userId } = auth()
@@ -27,7 +33,7 @@ export async function POST(req) {
 
     const response = await openai.chat.completions.create({
       model: 'gpt-4-turbo-preview',
-      messages: messages,
+      messages: [instructionMessage, ...messages],
       temperature: 1,
       max_tokens: 1024,
       top_p: 1,
@@ -37,7 +43,7 @@ export async function POST(req) {
 
     return NextResponse.json(response.choices[0].message)
   } catch (err) {
-    console.error('[CONVERSATION_ERROR]', err)
+    console.error('[CODE_ERROR]', err)
     return new NextResponse('Internal error', { status: 500 })
   }
 }
