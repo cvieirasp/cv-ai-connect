@@ -205,3 +205,11 @@ Instalamos o pacote **react-markdown** para que a resposta gerada pela IA seja e
 ```bash
 npm install react-markdown
 ```
+
+### Criação da página de Geração de Imagem
+
+Adicionamos o componente **select** responsável por exibir campo lista nos formulários.
+
+```bash
+npx shadcn-ui@latest add select
+```
