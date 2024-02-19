@@ -39,7 +39,7 @@ const tools = [
     icon: Music,
     color: 'text-emerald-500',
     bgColor: 'bg-emerald-500/10',
-    href: '/audio',
+    href: '/music',
   },
   {
     label: 'Geração de Código',

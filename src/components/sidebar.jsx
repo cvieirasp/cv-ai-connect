@@ -48,7 +48,7 @@ const routes = [
   {
     label: 'Geração de Áudio',
     icon: Music,
-    href: '/audio',
+    href: '/music',
     color: 'text-emerald-500',
   },
   {

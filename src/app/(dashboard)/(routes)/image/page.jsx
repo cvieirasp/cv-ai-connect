@@ -41,13 +41,9 @@ const ImagePage = () => {
   const onSubmit = async (data) => {
     try {
       setImages([])
-
       const response = await axios.post('/api/image', data)
-
       const urls = response.data.map((image) => image.url)
-
       setImages(urls)
-
       form.reset()
     } catch (err) {
       console.error(err)

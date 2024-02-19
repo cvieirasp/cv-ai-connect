@@ -213,3 +213,23 @@ Adicionamos o componente **select** responsável por exibir campo lista nos form
 ```bash
 npx shadcn-ui@latest add select
 ```
+
+### Configuração da API Replicate
+
+Criamos a conta na plataforma [Replicate](https://replicate.com) e geramos um token.
+
+Em seguida, adicionamos token ao arquivo `.env.local`.
+
+```bash
+REPLICATE_API_TOKEN=r8***
+```
+
+Para configuração e utilização da API **Replicate**, instalamos o pacote utilizando o seguinte comando:
+
+```bash
+npm install replicate
+```
+
+### Criação da página de Geração de Música
+
+Adicionamos a tag **audio** para exibir a música gerada.
