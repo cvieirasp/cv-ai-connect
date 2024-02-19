@@ -233,3 +233,7 @@ npm install replicate
 ### Criação da página de Geração de Música
 
 Adicionamos a tag **audio** para exibir a música gerada.
+
+### Criação da página de Geração de Vídeo
+
+Adicionamos a tag **video** para exibir o vídeo gerado.
