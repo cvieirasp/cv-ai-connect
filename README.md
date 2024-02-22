@@ -65,7 +65,7 @@ Para usar o Prettier que definimos, podemos configurar os seguintes scripts no a
 
 ### Configuração da autenticação utilizando Clerk
 
-Criamos a conta na plataforma [Clerk](https://clerk.com) e configuração da aplicação.
+Criamos a conta na plataforma [Clerk](https://clerk.com) e configuramos a aplicação.
 
 Para configuração e utilização do **Clerk**, instalamos o pacote utilizando o seguinte comando:
 
@@ -237,3 +237,63 @@ Adicionamos a tag **audio** para exibir a música gerada.
 ### Criação da página de Geração de Vídeo
 
 Adicionamos a tag **video** para exibir o vídeo gerado.
+
+### Desenvolvimento da funcionalidade de limitação de uso de recurso
+
+Criamos a conta na plataforma [Supabase](https://supabase.com) e configuramos um projeto de Banco de Dados.
+
+Adicionamos o [Prisma](https://www.prisma.io/docs/getting-started/quickstart) para interagirmos com banco de dados utilizando o seguinte comando:
+
+```bash
+npm i -D prisma
+```
+
+Para iniciarmos o **Prisma**, utilizamos o comando abaixo:
+
+```bash
+npx prisma init
+```
+
+Inserimos a configuração abaixo no arquivo `package.json`.
+
+```bash
+"prisma": {
+    "schema": "src/db/schema.prisma"
+},
+```
+
+Instalamos o _client_ do **Prisma** utilizando o seguinte comando:
+
+```bash
+npm i @prisma/client
+```
+
+Para nos ajudar com diferentes arquivos `.env`, instalamos o pacote `.dotenv-cli`.
+
+```bash
+npm i -D dotenv-cli
+```
+
+Criamos o modelo da nossa tabela de banco de dados no arquivo `schema.prisma`.
+
+```bash
+model UserApiLimit {
+  id        String    @id @default(uuid())
+  userId    String    @unique
+  count     Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+```
+
+Executamos o comando abaixo para criar a tabela no **Supabase**.
+
+```bash
+npx dotenv -e .env.local -- npx prisma db push
+```
+
+Executamos o comando abaixo para gerar nosso cliente **Prisma**.
+
+```bash
+npx dotenv -e .env.local -- npx prisma generate
+```
