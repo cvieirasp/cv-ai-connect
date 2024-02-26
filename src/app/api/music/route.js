@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import Replicate from 'replicate'
 import { auth } from '@clerk/nextjs'
+import { increaseApiLimit, hasApiLimit } from '@/lib/api-limit'
 
 const key = process.env.REPLICATE_API_TOKEN
 const replicate = new Replicate({
@@ -27,6 +28,12 @@ export async function POST(req) {
       return new NextResponse('Prompt are required', { status: 400 })
     }
 
+    const isFreeTrial = await hasApiLimit()
+
+    if (!isFreeTrial) {
+      return new NextResponse('Free trial has expired', { status: 403 })
+    }
+
     const response = await replicate.run(
       'riffusion/riffusion:8cf61ea6c56afd61d8f5b9ffd14d7c216c0a93844ce2d82ac1c9ecc9c7f24e05',
       {
@@ -35,6 +42,8 @@ export async function POST(req) {
         },
       }
     )
+
+    await increaseApiLimit()
 
     return NextResponse.json(response)
   } catch (err) {

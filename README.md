@@ -297,3 +297,11 @@ Executamos o comando abaixo para gerar nosso cliente **Prisma**.
 ```bash
 npx dotenv -e .env.local -- npx prisma generate
 ```
+
+### Criação do componente para exibição do limite de uso
+
+Adicionamos o componente **progress** responsável por exibir uma barra de progresso, indicando o status de uso dos recursos.
+
+```bash
+npx shadcn-ui@latest add progress
+```
