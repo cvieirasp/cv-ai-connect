@@ -16,8 +16,10 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import UserAvatar from '@/components/user-avatar'
 import BotAvatar from '@/components/bot-avatar'
+import useProModal from '@/hooks/use-pro-modal'
 
 const ConversationPage = () => {
+  const proModal = useProModal()
   const router = useRouter()
   const [messages, setMessages] = useState([])
 
@@ -47,6 +49,9 @@ const ConversationPage = () => {
 
       form.reset()
     } catch (err) {
+      if (err?.response?.status === 403) {
+        proModal.onOpen()
+      }
       console.error(err)
     } finally {
       router.refresh()

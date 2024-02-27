@@ -13,8 +13,10 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { formSchema } from './constants'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import useProModal from '@/hooks/use-pro-modal'
 
 const MusicPage = () => {
+  const proModal = useProModal()
   const router = useRouter()
   const [music, setMusic] = useState()
 
@@ -34,6 +36,9 @@ const MusicPage = () => {
       setMusic(response.data.audio)
       form.reset()
     } catch (err) {
+      if (err?.response?.status === 403) {
+        proModal.onOpen()
+      }
       console.error(err)
     } finally {
       router.refresh()

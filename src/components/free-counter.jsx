@@ -6,15 +6,17 @@ import { MAX_FREE_COUNTS } from '@/constants'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
+import useProModal from '@/hooks/use-pro-modal'
 
 const FreeCounter = ({ apiLimitCount = 0 }) => {
-  const [mounted, setMounted] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+  const proModal = useProModal()
 
   useEffect(() => {
-    setMounted(true)
+    setIsMounted(true)
   }, [])
 
-  if (!mounted) {
+  if (!isMounted) {
     return null
   }
 
@@ -31,7 +33,11 @@ const FreeCounter = ({ apiLimitCount = 0 }) => {
               value={(apiLimitCount / MAX_FREE_COUNTS) * 100}
             />
           </div>
-          <Button className='w-full' variant='premium'>
+          <Button
+            className='w-full'
+            variant='premium'
+            onClick={proModal.onOpen}
+          >
             Atualizar
             <Zap className='ml-2 h-4 w-4 fill-white' />
           </Button>

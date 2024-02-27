@@ -22,8 +22,10 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
+import useProModal from '@/hooks/use-pro-modal'
 
 const ImagePage = () => {
+  const proModal = useProModal()
   const router = useRouter()
   const [images, setImages] = useState([])
 
@@ -46,6 +48,9 @@ const ImagePage = () => {
       setImages(urls)
       form.reset()
     } catch (err) {
+      if (err?.response?.status === 403) {
+        proModal.onOpen()
+      }
       console.error(err)
     } finally {
       router.refresh()

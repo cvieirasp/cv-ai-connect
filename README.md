@@ -305,3 +305,23 @@ Adicionamos o componente **progress** responsável por exibir uma barra de progr
 ```bash
 npx shadcn-ui@latest add progress
 ```
+
+### Criação do componente Pro Modal
+
+Adicionamos a biblioteca [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) para gerenciamento de estados.
+
+```bash
+npm i zustand
+```
+
+Adicionamos o componente **dialog** responsável por exibir caixa de diálogo.
+
+```bash
+npx shadcn-ui@latest add dialog
+```
+
+Adicionamos o componente **badge** responsável por exibir uma badge.
+
+```bash
+npx shadcn-ui@latest add badge
+```
