@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import useProModal from '@/hooks/use-pro-modal'
 
-const FreeCounter = ({ apiLimitCount = 0 }) => {
+const FreeCounter = ({ apiLimitCount = 0, isPro = false }) => {
   const [isMounted, setIsMounted] = useState(false)
   const proModal = useProModal()
 
@@ -16,7 +16,7 @@ const FreeCounter = ({ apiLimitCount = 0 }) => {
     setIsMounted(true)
   }, [])
 
-  if (!isMounted) {
+  if (!isMounted || isPro) {
     return null
   }
 
