@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+import axios from 'axios'
 import {
   Check,
   MessageSquare,
@@ -58,6 +60,19 @@ const tools = [
 
 const ProModal = () => {
   const proModal = useProModal()
+  const [loading, setLoading] = useState(false)
+
+  const onSubscribe = async () => {
+    try {
+      setLoading(true)
+      const response = axios.get('/api/stripe')
+      window.location.href = (await response).data.url
+    } catch (err) {
+      console.error(err, 'STRIPE_CLIENT_ERROR')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
@@ -89,7 +104,12 @@ const ProModal = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button size='lg' variant='premium' className='fill-white'>
+          <Button
+            size='lg'
+            variant='premium'
+            className='fill-white'
+            onClick={onSubscribe}
+          >
             Atualizar
             <Zap className='ml-2 h-4 w-4 fill-white' />
           </Button>

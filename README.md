@@ -286,16 +286,16 @@ model UserApiLimit {
 }
 ```
 
-Executamos o comando abaixo para criar a tabela no **Supabase**.
-
-```bash
-npx dotenv -e .env.local -- npx prisma db push
-```
-
 Executamos o comando abaixo para gerar nosso cliente **Prisma**.
 
 ```bash
 npx dotenv -e .env.local -- npx prisma generate
+```
+
+Executamos o comando abaixo para criar a tabela no **Supabase**.
+
+```bash
+npx dotenv -e .env.local -- npx prisma db push
 ```
 
 ### Criação do componente para exibição do limite de uso
@@ -324,4 +324,70 @@ Adicionamos o componente **badge** responsável por exibir uma badge.
 
 ```bash
 npx shadcn-ui@latest add badge
+```
+
+### Configuração da plataforma de pagamentos utilizando Stripe
+
+Criamos a conta na plataforma [Stripe](https://clerk.com) e configuramos uma empresa.
+
+Em seguida, adicionamos a secret ao arquivo `.env.local`.
+
+```bash
+STRIPE_SECRET_KEY=sk_test_**
+```
+
+Para configuração e utilização do **Stripe**, instalamos o pacote utilizando o seguinte comando:
+
+```bash
+npm i stripe
+```
+
+Criamos o modelo da nossa tabela de banco de dados no arquivo `schema.prisma`.
+
+```bash
+model UserSubscription {
+  id        String    @id @default(uuid())
+  userId    String    @unique
+  count     Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+```
+
+Executamos o comando abaixo para gerar nosso cliente **Prisma**.
+
+```bash
+npx dotenv -e .env.local -- npx prisma generate
+```
+
+Executamos o comando abaixo para criar a tabela no **Supabase**.
+
+```bash
+npx dotenv -e .env.local -- npx prisma db push
+```
+
+Adicionamos a URL da nossa aplicação ao arquivo `.env.local`.
+
+```bash
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+Utilizaremos o CLI do Stripe para simular eventos no ambiente local. Para isso, devemos seguir os seguintes passos:
+
+1. [Baixar o CLI](https://github.com/stripe/stripe-cli/releases) e fazer login com a conta criada inicialmente.
+
+```bash
+stripe login
+```
+
+2. Encaminhar eventos ao webhook
+
+```bash
+stripe listen --forward-to localhost:3000/api/webhook
+```
+
+3. Adicionar a secret gerada ao arquivo `.env.local`.
+
+```bash
+STRIPE_WEBHOOK_SECRET=whsec_**
 ```

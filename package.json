@@ -9,7 +9,9 @@
     "lint": "next lint",
     "format": "prettier --check --ignore-path .gitignore .",
     "format:fix": "prettier --write --ignore-path .gitignore .",
-    "prisma:studio": "npx dotenv -e .env.local -- npx prisma studio"
+    "prisma:studio": "npx dotenv -e .env.local -- npx prisma studio",
+    "prisma:generate": "npx dotenv -e .env.local -- npx prisma generate",
+    "prisma:dbpush": "npx dotenv -e .env.local -- npx prisma db push"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma"
@@ -35,6 +37,7 @@
     "react-hook-form": "^7.50.0",
     "react-markdown": "^9.0.1",
     "replicate": "^0.27.1",
+    "stripe": "^14.18.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4",
