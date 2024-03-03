@@ -11,7 +11,8 @@
     "format:fix": "prettier --write --ignore-path .gitignore .",
     "prisma:studio": "npx dotenv -e .env.local -- npx prisma studio",
     "prisma:generate": "npx dotenv -e .env.local -- npx prisma generate",
-    "prisma:dbpush": "npx dotenv -e .env.local -- npx prisma db push"
+    "prisma:dbpush": "npx dotenv -e .env.local -- npx prisma db push",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma"
