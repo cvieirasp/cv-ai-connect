@@ -391,3 +391,35 @@ stripe listen --forward-to localhost:3000/api/webhook
 ```bash
 STRIPE_WEBHOOK_SECRET=whsec_**
 ```
+
+### Configuração de tratamento de erros
+
+Instalamos o componente abaixo para exibição de erros no frontend em casos de exceções nas API's.
+
+```bash
+npm i react-hot-toast
+```
+
+### Configuração da plataforma de chatbot de suporte Crisp
+
+Criamos a conta na plataforma [Crisp](https://app.crisp.chat) e configuramos a aplicação.
+
+Em seguida, adicionamos o identificador do chat gerado ao arquivo `.env.local`.
+
+```bash
+CRISP_WEBSITE_ID="***"
+```
+
+Para configuração e utilização do **Crisp**, instalamos o pacote utilizando o seguinte comando:
+
+```bash
+npm i crisp-sdk-web
+```
+
+### Criação da Landing Page
+
+Adicionamos o componente **typewriter-effect** para exibir efeito de máquina de escrever.
+
+```bash
+npm i typewriter-effect
+```

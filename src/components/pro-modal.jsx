@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import axios from 'axios'
+import toast from 'react-hot-toast'
 import {
   Check,
   MessageSquare,
@@ -68,6 +69,7 @@ const ProModal = () => {
       const response = axios.get('/api/stripe')
       window.location.href = (await response).data.url
     } catch (err) {
+      toast.error('Ocorreu um erro enviar solicitação.')
       console.error(err, 'STRIPE_CLIENT_ERROR')
     } finally {
       setLoading(false)

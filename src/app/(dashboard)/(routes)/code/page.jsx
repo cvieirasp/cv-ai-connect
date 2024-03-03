@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios'
+import toast from 'react-hot-toast'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
@@ -52,6 +53,8 @@ const CodePage = () => {
     } catch (err) {
       if (err?.response?.status === 403) {
         proModal.onOpen()
+      } else {
+        toast.error('Ocorreu um erro ao enviar a mensagem.')
       }
       console.error(err)
     } finally {
